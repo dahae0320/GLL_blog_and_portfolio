@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -75,12 +76,25 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    'default' : {
+        'ENGINE' : 'django.db.backends.postgresql_psycopg2',  
+        'NAME' : 'd9oiqfad6qkj3q',    #DATABASE
+        'USER' : 'rmvtcvqwlzmuwg',    #USER
+        'PASSWORD' : '272049a5e91345a5c27a4e0efbd4ed4269aa6aaa1cba94797526a39941e111dc',    #PASSWORD
+        'HOST' : 'ec2-34-200-72-77.compute-1.amazonaws.com',    #HOST
+        'PORT' : '5432',    #PORT  
     }
 }
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation
